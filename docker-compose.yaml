@@ -1,0 +1,179 @@
+# docker-compose.yaml
+# 同样遵循严格的缩进
+version: '3.1'
+
+services:
+
+#  info-service:
+#    build: service/info-service
+#    command: --registry_address=consul:8500
+#    ports:
+#      - 50003:50051
+#    environment:
+#      NET: "host"
+#      DB_NAME: "mysql"
+#      DB_HOST: "mysql"
+#      DB_PORT: "3306"
+#      DB_USER: "root"
+#      DB_PASSWORD: "123456"
+#    depends_on:
+#      - mysql
+#      - consul
+
+  user_services_1:
+    build: service/user_service
+#    command: --registry_address=consul:8500
+    ports:
+      - 50034:50051
+    volumes:
+      - ~/data/logs/go/:/data/logs/go/
+    environment:
+      NET: "host"
+      TZ: Asia/Shanghai
+#    depends_on:
+#      - consul
+
+#  user_services2:
+#    build: service/user_service
+#    command: --registry_address=consul:8500
+#    ports:
+#      - 50035:50051
+#    volumes:
+#      - ~/data/logs/go/:/data/logs/go/
+#    environment:
+#      NET: "host"
+#      TZ: Asia/Shanghai
+#    depends_on:
+#      - consul
+
+  home_services_2:
+    build: service/home_service
+#    command: --registry_address=consul:8500
+    ports:
+      - 50044:50061
+    volumes:
+      - ~/data/logs/go/:/data/logs/go/
+    environment:
+      NET: "host"
+      TZ: Asia/Shanghai
+#    depends_on:
+#      - consul
+
+#  home_services2:
+#    build: service/home_service
+#    command: --registry_address=consul:8500
+#    ports:
+#      - 50045:50061
+#    volumes:
+#      - ~/data/logs/go/:/data/logs/go/
+#    environment:
+#      NET: "host"
+#      TZ: Asia/Shanghai
+#    depends_on:
+#      - consul
+
+#  home-service:
+#    build: ./service/home-service
+#    command: --registry_address=consul:8500
+#    ports:
+#      - 50001:50051
+#    environment:
+#      NET: "host"
+#      DB_NAME: "mysql"
+#      DB_HOST: "mysql"
+#      DB_PORT: "3306"
+#      DB_USER: "root"
+#      DB_PASSWORD: "123456"
+#      REDIS_ADDR: "redis:6379"
+#      REDIS_PWD: ""
+#    depends_on:
+#      - mysql
+#      - consul
+#      - redis
+
+  im_services_1:
+    build: service/im_service
+    #    command: --registry_address=consul:8500
+    ports:
+      - 50054:50071
+    volumes:
+      - ~/data/logs/go/:/data/logs/go/
+    environment:
+      NET: "host"
+      TZ: Asia/Shanghai
+  #    depends_on:
+  #      - consul
+
+
+  common_services_1:
+    build: service/common_service
+    #    command: --registry_address=consul:8500
+    ports:
+      - 60044:60061
+    volumes:
+      - ~/data/logs/go/:/data/logs/go/
+    environment:
+      NET: "host"
+      TZ: Asia/Shanghai
+  #    depends_on:
+  #      - consul
+
+  api_2:
+    build: ./api
+#    command: --registry_address=consul:8500
+    ports:
+      - 8099:20050
+    volumes:
+      - ~/data/logs/go/:/data/logs/go/
+    environment:
+      NET: "host"
+      TZ: Asia/Shanghai
+#    depenentrypointds_on:
+#      - consul
+
+#  consul:
+#    image: progrium/consul:latest
+#    container_name: consul_university_circles
+#    volumes:
+#      - ~/data/logs/go/:/data/logs/go/
+#    environment:
+#      NET: "host"
+#    command: -ui-dir /ui -server -bootstrap
+#    ports:
+#      - 8300:8300
+#      - 8301:8301
+#      - 8301:8301/udp
+#      - 8302:8302
+#      - 8302:8302/udp
+#      - 8400:8400
+#      - 8500:8500
+#      - 53:53/udp
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8500"]
+#      interval: 5s
+#      timeout: 5s
+#      retries: 3
+
+#  database:
+#    image: postgres
+#    ports:
+#      - 5432:5432
+
+#  mysql1:
+#    image: cytopia/mysql-5.7
+#    environment:
+#      MYSQL_ROOT_PASSWORD: "123456"
+#    ports:
+#      - 3305:3306
+#
+#  redis:
+#    image: redis
+#    environment:
+#      requirepass: "123456"
+#    ports:
+#      - 6378:6379
+
+#  datastore:
+#    image: mongo
+#    ports:
+#      - 27017:27017

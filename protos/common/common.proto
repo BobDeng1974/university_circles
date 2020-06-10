@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package university_circles.srv.common;
+
+service CommonService {
+    // 通过反馈接口  1、反馈  2、举报首页消息 3、举报商品
+    rpc Report (ReportReq) returns (Response) {}
+}
+
+message ReportReq {
+    int64 type = 1;
+    string content = 2;
+    string pic = 3;
+    string msg_id = 4;
+    string goods_id = 5;
+    string uid = 6;
+}
+
+message Response {
+    // 响应是否成功
+    int64 success = 1;
+    // 响应信息
+    string msg = 2;
+}

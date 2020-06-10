@@ -1,0 +1,422 @@
+syntax = "proto3";
+
+package university_circles.srv.user;
+
+service UserService {
+    // 学生注册
+    rpc StudentRegister (UserRegisterReq) returns (Response) {}
+    // 用户注册校验验证码
+    rpc CheckVerifyCode (VerifyCodeRegReq) returns (Response) {}
+    // 学生注册信息
+//    rpc AddStudentInfo (StudentRegInfo) returns (Response) {}
+    // 修改某个学生基础信息
+    rpc UpdateStudentInfo (UpdateStudentInfoReq) returns (Response) {}
+    // 根据ID获取某个学生的信息
+    rpc GetStudentInfoById (GetStudentByIdReq) returns (StudentInfoDetail) {}
+    // 根据用户名获取某个学生的信息
+    rpc GetStudentInfoByUsername (GetStudentByUsernameReq) returns (StudentInfoDetail) {}
+
+    // 获取模糊查询的所有大学
+    rpc GetUniversity (GetUniversityReq) returns (GetUniversityListResponse) {}
+    // 获取所有大学
+    rpc GetUniversityList (GetUniversityListReq) returns (GetUniversityListResponse) {}
+    // 获取某个学校的所有学院
+    rpc GetCollegeList (GetCollegeListReq) returns (GetCollegeListResponse) {}
+    // 获取某个学校某个学院的学科
+    rpc GetProfessionList (GetProfessionListReq) returns (GetProfessionListResponse) {}
+    // 获取某个学校某个学院的学科的班级
+    rpc GetClassList (GetClassListReq) returns (GetClassListResponse) {}
+
+    // 教师注册
+    rpc TeacherRegister (UserRegisterReq) returns (Response) {}
+    rpc UpdateTeacherInfo (UpdateTeacherInfoReq) returns (Response) {}
+    rpc GetTeacherInfoById (GetTeacherByIdReq) returns (TeacherInfoDetail) {}
+    rpc GetTeacherListByUniversityId (GetTeacherListByUniIdReq) returns (TeacherListResp) {}
+    rpc GetTeacherListByCollegeId (GetTeacherListByCollegeIdReq) returns (TeacherListResp) {}
+
+    // 修改头像
+    rpc UpdateUserAvatar (UpdateUserAvatarReq) returns (Response) {}
+    // 修改用户手机
+    rpc UpdateUserPhone (UpdateUserPhoneReq) returns (Response) {}
+    // 修改用户密码
+    rpc UpdateUserPassword (UpdateUserPasswordReq) returns (Response) {}
+    // 查询添加的用户的信息
+    rpc QueryUser (QueryUserReq) returns (QueryUserResp) {}
+    // 根据手机号、用户名判断用户是否存在
+    rpc CheckUserIsExist (CheckUserIsExistReq) returns (Response) {}
+
+    // 关注某个用户
+    rpc SaveUserFollow (UserFollowOperateReq) returns (Response) {}
+    // 取消关注某个用户
+    rpc CancelUserFollow (UserFollowOperateReq) returns (Response) {}
+    // 获取某个用户关注的用户列表
+    rpc GetUserFollowList (UserFollowListReq) returns (UserFollowOperateResponse) {}
+    // 获取某个用户被关注的用户列表
+    rpc GetUserFollowingList (UserFollowListReq) returns (UserFollowOperateResponse) {}
+
+    // 密码登录
+    rpc PwdLogin (PwdLoginReq) returns (LoginResponse) {}
+    // 验证码登录
+    rpc VerifyCodeLogin (VerifyCodeLoginReq) returns (LoginResponse) {}
+    // 登出
+    rpc Logout (LogoutReq) returns (Response) {}
+    // 发送验证码
+    rpc GetVerifyCode (VerifyCodeReq) returns (VerifyCodeResponse) {}
+
+}
+
+message UserRegisterReq {
+    string username = 1;
+    string password = 2;
+    string phone = 3;
+    string code = 4;
+    string image_id = 5;
+    int64 gender = 6;
+    string id_card_number = 7;
+    string user_no = 8;
+    string realName = 9;
+    string screenName = 10;
+    string email = 11;
+    string university = 12;
+    string profession = 13;
+    int64 forbiStranger = 14;
+    string verify_image_id = 15;
+}
+
+// 注册的学生信息
+message StudentRegInfo {
+    string id_card_number = 1;
+    string stu_no = 2;
+    string realName = 3;
+    string screenName = 4;
+    string password = 5;
+    string phone = 7;
+    string email = 8;
+    string imageId = 9;
+    string university = 10;
+    string profession = 11;
+//    string entry_date = 16;
+//    string graduation_date = 17;
+}
+
+// 更新的学生基本信息
+message UpdateStudentInfoReq {
+    string id = 1;
+    string bio = 2;
+    string zodiac = 3;
+    string screenName = 4;
+    string email = 5;
+    string birthday = 6;
+    string city = 7;
+    string country = 8;
+    string province = 9;
+}
+
+// 更新用户电话
+message UpdateUserPhoneReq {
+    string uid = 1;
+    string password = 2;
+    string phone = 3;
+    string code = 4;
+    int64 type = 5;
+}
+
+// 更新用户头像
+message UpdateUserAvatarReq {
+    string uid = 1;
+    string avatar = 2;
+    int64 type = 3;
+}
+
+// 更新用户密码
+message UpdateUserPasswordReq {
+    string uid = 1;
+    string oldPassword = 2;
+    string newPassword = 3;
+    string phone = 4;
+    string code = 5;
+    int64 type = 6;
+}
+
+message Avatar {
+    string thumbnailUrl = 1;
+    string smallPicUrl = 2;
+    string picUrl = 3;
+}
+
+// 返回的学生详细信息
+message StudentInfoDetail {
+    string id = 1;
+    string id_card_number = 2;
+    string stu_no = 3;
+    string realName = 4;
+    string screenName = 5;
+    string city = 6;
+    string country = 7;
+    string province = 8;
+    string gender = 9;
+    string birthday = 10;
+    string bio = 11;
+    string university = 12;
+    string college = 13;
+    string Profession = 14;
+    string class = 15;
+    string entry_date = 16;
+    string graduation_date = 17;
+    bool isVerified = 18;
+    string verifyMessage = 19;
+    string zodiac = 20;
+    Avatar avatarImage = 21;
+    string phone = 22;
+    string email = 23;
+    // im的id
+    int64 mid = 24;
+}
+
+// 动态里的用户基本信息
+message EsUserInfo {
+    string id = 1;
+    string username = 2;
+    string screenName = 3;
+    string bio = 4;
+    bool isVerified = 5;
+    string verifyMessage = 6;
+    string zodiac = 7;
+    Avatar avatarImage = 8;
+    int64 university_id = 9;
+    int64 mid = 10;
+    int64 forbiStranger = 11;
+    string phone = 12;
+    string email = 13;
+}
+
+// 教师信息
+message TeacherInfo {
+    string uid = 1;
+    string teach_no = 2;
+    string nick_name = 4;
+    uint64 sex = 6;
+    string phone = 7;
+    string email = 8;
+    string avatar = 9;
+    string birthday = 10;
+    string motto = 11;
+    uint64 university_id = 12;
+    uint64 college_id = 13;
+    string course = 14;
+    string detail = 15;
+    int64 mid = 16;
+}
+
+// 返回的学生详细信息
+message TeacherInfoDetail {
+    string id = 1;
+    string id_card_number = 2;
+    string teach_no = 3;
+    string realName = 4;
+    string screenName = 5;
+    string city = 6;
+    string country = 7;
+    string province = 8;
+    string gender = 9;
+    string birthday = 10;
+    string bio = 11;
+    string university = 12;
+    string college = 13;
+    string Profession = 14;
+    bool isVerified = 15;
+    string verifyMessage = 16;
+    string zodiac = 17;
+    Avatar avatarImage = 18;
+    string phone = 19;
+    string email = 20;
+    // im的id
+    int64 mid = 21;
+}
+
+
+message UpdateTeacherInfoReq {
+    string id = 1;
+    string bio = 2;
+    string zodiac = 3;
+    string screenName = 4;
+    string email = 5;
+    string birthday = 6;
+    string city = 7;
+    string country = 8;
+    string province = 9;
+}
+
+message TeacherListResp {
+    repeated TeacherInfo teachers = 1;
+}
+
+message QueryUserReq {
+    string reqStr = 1;
+    int64 type = 2;
+}
+
+message QueryUserResp {
+    repeated QueryUser UserInfos = 1;
+}
+
+message QueryUser {
+    int64 uid = 1;
+    string nickname = 2;
+    bool mute = 3; // 禁言
+    string image_url = 4;
+}
+
+message GetStudentByIdReq {
+    string id = 1;
+}
+
+message GetStudentByUsernameReq {
+    string username = 1;
+}
+
+message CheckUserIsExistReq {
+    string username = 1;
+    string phone = 2;
+}
+
+message GetTeacherByIdReq {
+    string id = 1;
+}
+
+message GetTeacherListByUniIdReq {
+    int64 university_id = 1;
+}
+
+message GetTeacherListByCollegeIdReq {
+    int64 college_id = 1;
+}
+
+message UserFollowOperateReq {
+    string uid = 1;
+    string follow_uid = 2;
+}
+
+message UserFollowOperateResponse {
+    repeated EsUserInfo user_list = 1;
+}
+
+message UserFollowListReq {
+    string uid = 1;
+}
+
+
+message PwdLoginReq {
+    string username = 1;
+    string password = 2;
+}
+
+message VerifyCodeLoginReq {
+    string phone = 1;
+    string code = 2;
+}
+
+message VerifyCodeRegReq {
+    string phone = 1;
+    string code = 2;
+    int64 type = 3;
+}
+
+message VerifyCodeReq {
+    string phone = 1;
+}
+
+message VerifyCodeResponse {
+    int64 status = 1;
+    string code = 2;
+}
+
+message Response {
+     // 响应是否成功
+     int64 success = 1;
+     // 响应信息
+     string msg = 2;
+}
+
+message LoginResponse {
+    // 响应是否成功
+    int64 success = 1;
+    // 响应信息
+    string msg = 2;
+    // 用户id
+    string uid = 3;
+    // 用户名
+    string nickname = 4;
+    // 大学
+    int64 universityId = 5;
+    // im的id
+    int64 mid = 6;
+    // 头像
+    string avatar = 7;
+    // 身份 1.教师  2.学生
+    int64 type = 8;
+}
+
+message LogoutReq {
+    string id = 1;
+    int64 type = 2;
+}
+
+message GetUniversityReq {
+    string university = 1;
+}
+
+message GetUniversityListReq {
+}
+
+message GetUniversityResponse {
+    int64 id = 1;
+    string name = 2;
+}
+
+message GetUniversityListResponse {
+    repeated GetUniversityResponse getUniversityList = 1;
+
+}
+
+message GetCollegeListReq {
+    string university_id = 1;
+}
+
+message GetCollegeResponse {
+    int64 id = 1;
+    string name = 2;
+}
+
+message GetCollegeListResponse {
+    repeated GetCollegeResponse getCollegeList = 1;
+}
+
+message GetProfessionListReq {
+    string university_id = 1;
+    string college_id = 2;
+}
+
+message GetProfessionResponse {
+    int64 id = 1;
+    string name = 2;
+}
+
+message GetProfessionListResponse {
+    repeated GetProfessionResponse getProfessionList = 1;
+}
+
+message GetClassListReq {
+    string university_id = 1;
+    string college_id = 2;
+    string profession_id = 3;
+}
+
+message GetClassResponse {
+    int64 id = 1;
+    string name = 2;
+}
+
+message GetClassListResponse {
+    repeated GetClassResponse getClassList = 1;
+}

@@ -1,0 +1,100 @@
+schema="public"
+[mysql]
+    dbname = "university_circles"
+    host ="127.0.0.1"
+    port =3306
+    user = "root"
+    pass = "I3T$GcnojZ%Db2GG*&Z^fQnb3^UYFk94"
+    sslmode = "false"
+    whitelist = [
+        "home_publish_msg",
+        "home_publish_msg_comment",
+        "home_publish_msg_comment_picture",
+        "home_publish_msg_comment_urls_in_text",
+        "home_publish_msg_failed_recode",
+        "home_publish_msg_picture",
+        "home_publish_msg_linkinfo",
+        "home_publish_msg_poi",
+        "home_publish_msg_urls_in_text",
+        "home_publish_msg_video",
+        ]
+    blacklist = ["mysql", "test"]
+
+
+    [[aliases.tables]]
+        name          = "home_publish_msg"
+        up_plural     = "Homes"
+        up_singular   = "Home"
+        down_plural   = "homes"
+        down_singular = "home"
+
+    [[aliases.tables]]
+        name          = "home_publish_msg_comment"
+        up_plural     = "HomeComments"
+        up_singular   = "HomeComment"
+        down_plural   = "homeComments"
+        down_singular = "homeComment"
+
+    [[aliases.tables]]
+        name          = "home_publish_msg_failed_recode"
+        up_plural     = "HomeFailedRecodes"
+        up_singular   = "HomeFailedRecode"
+        down_plural   = "homeFailedRecodes"
+        down_singular = "homeFailedRecode"
+
+    [[aliases.tables]]
+        name          = "home_publish_msg_poi"
+        up_plural     = "HomePois"
+        up_singular   = "HomePoi"
+        down_plural   = "homePois"
+        down_singular = "homePoi"
+
+   [[aliases.tables]]
+       name          = "home_publish_msg_linkinfo"
+       up_plural     = "HomeLinkinfos"
+       up_singular   = "HomeLinkinfo"
+       down_plural   = "homeLinkinfos"
+       down_singular = "homeLinkinfo"
+
+   [[aliases.tables]]
+       name          = "home_publish_msg_picture"
+       up_plural     = "HomePictures"
+       up_singular   = "HomePicture"
+       down_plural   = "homePictures"
+       down_singular = "homePicture"
+
+   [[aliases.tables]]
+      name          = "home_publish_msg_urls_in_text"
+      up_plural     = "HomeUrlsInTexts"
+      up_singular   = "HomeUrlsInText"
+      down_plural   = "homeUrlsInTexts"
+      down_singular = "homeUrlsInText"
+
+   [[aliases.tables]]
+      name          = "home_publish_msg_video"
+      up_plural     = "HomeVideos"
+      up_singular   = "HomeVideo"
+      down_plural   = "homeVideos"
+      down_singular = "homeVideo"
+
+   [[aliases.tables]]
+      name          = "home_publish_msg_comment"
+      up_plural     = "HomeComments"
+      up_singular   = "HomeComment"
+      down_plural   = "homeComments"
+      down_singular = "homeComment"
+
+   [[aliases.tables]]
+     name          = "home_publish_msg_comment_picture"
+     up_plural     = "HomeCommentPictures"
+     up_singular   = "HomeCommentPicture"
+     down_plural   = "homeCommentPictures"
+     down_singular = "homeCommentPicture"
+
+    [[aliases.tables]]
+     name          = "home_publish_msg_comment_urls_in_text"
+     up_plural     = "HomeCommentUrlsInTexts"
+     up_singular   = "HomeCommentUrlsInText"
+     down_plural   = "homeCommentUrlsInTexts"
+     down_singular = "homeCommentUrlsInText"
+

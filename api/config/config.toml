@@ -1,0 +1,10 @@
+env = "development"
+[app]
+    name = "university_circls"
+    bind = "0.0.0.0:11815"
+    debug = 1
+
+[log]
+    path = "/data/logs/go/"
+    access_log = "university_circls_api.log"
+    run_log = "university_circls_api.log"

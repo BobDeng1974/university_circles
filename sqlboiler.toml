@@ -1,0 +1,68 @@
+schema="public"
+[mysql]
+    dbname = "university_circles"
+    host ="127.0.0.1"
+    port =3306
+    user = "root"
+    pass = "49ba59abbe56e057"
+    sslmode = "false"
+    whitelist = [
+        "university_student",
+        "university_teacher",
+        "university_verify_code",
+        "university",
+        "university_college",
+        "university_college_science",
+        "university_college_science_class",
+        ]
+    blacklist = ["mysql", "test"]
+
+
+    [[aliases.tables]]
+        name          = "university_student"
+        up_plural     = "UStudents"
+        up_singular   = "UStudent"
+        down_plural   = "uStudents"
+        down_singular = "uStudent"
+
+    [[aliases.tables]]
+        name          = "university_teacher"
+        up_plural     = "UTeachers"
+        up_singular   = "UTeacher"
+        down_plural   = "uTeachers"
+        down_singular = "uTeacher"
+
+    [[aliases.tables]]
+        name          = "university_verify_code"
+        up_plural     = "UVerifyCodes"
+        up_singular   = "UVerifyCode"
+        down_plural   = "uVerifyCodes"
+        down_singular = "uVerifyCode"
+
+    [[aliases.tables]]
+        name          = "university"
+        up_plural     = "Universitys"
+        up_singular   = "University"
+        down_plural   = "universitys"
+        down_singular = "university"
+
+    [[aliases.tables]]
+        name          = "university_college"
+        up_plural     = "UniversityColleges"
+        up_singular   = "UniversityCollege"
+        down_plural   = "universityColleges"
+        down_singular = "universityCollege"
+
+    [[aliases.tables]]
+        name          = "university_college_science"
+        up_plural     = "UniversityCollegeSciences"
+        up_singular   = "UniversityCollegeScience"
+        down_plural   = "universityCollegeSciences"
+        down_singular = "universityCollegeScience"
+
+    [[aliases.tables]]
+        name          = "university_college_science_class"
+        up_plural     = "UniversityCollegeScienceClasses"
+        up_singular   = "UniversityCollegeScienceClass"
+        down_plural   = "universityCollegeScienceClasses"
+        down_singular = "universityCollegeScienceClass"

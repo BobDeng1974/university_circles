@@ -1,0 +1,60 @@
+schema="public"
+[mysql]
+    dbname = "university_circles"
+    host ="127.0.0.1"
+    port =3306
+    user = "root"
+    pass = "I3T$GcnojZ%Db2GG*&Z^fQnb3^UYFk94"
+    sslmode = "false"
+    whitelist = [
+        "group",
+        "group_member",
+        "blacklist",
+        "friend",
+        "university_student",
+        "university_teacher"
+        ]
+    blacklist = ["mysql", "test"]
+
+    [[aliases.tables]]
+        name          = "group"
+        up_plural     = "Groups"
+        up_singular   = "Group"
+        down_plural   = "groups"
+        down_singular = "group"
+
+    [[aliases.tables]]
+        name          = "group_member"
+        up_plural     = "GroupMembers"
+        up_singular   = "GroupMember"
+        down_plural   = "groupMembers"
+        down_singular = "groupMember"
+
+    [[aliases.tables]]
+        name          = "blacklist"
+        up_plural     = "Blacklists"
+        up_singular   = "Blacklist"
+        down_plural   = "blacklists"
+        down_singular = "blacklist"
+
+    [[aliases.tables]]
+        name          = "friend"
+        up_plural     = "Friends"
+        up_singular   = "Friend"
+        down_plural   = "friends"
+        down_singular = "friend"
+
+    [[aliases.tables]]
+        name          = "university_student"
+        up_plural     = "UStudents"
+        up_singular   = "UStudent"
+        down_plural   = "uStudents"
+        down_singular = "uStudent"
+
+    [[aliases.tables]]
+        name          = "university_teacher"
+        up_plural     = "UTeachers"
+        up_singular   = "UTeacher"
+        down_plural   = "uTeachers"
+        down_singular = "uTeacher"
+

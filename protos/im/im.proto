@@ -1,0 +1,353 @@
+syntax = "proto3";
+
+package university_circles.srv.protos;
+
+service ImService {
+    // 发送一对一消息请求
+    rpc SendPeerMsg (SendPeerMsgReq) returns (Response) {}
+    // 发送群组消息请求
+//    rpc SendGroupMsg (SendGroupMsgReq) returns (Response) {}
+    // 添加好友
+    rpc AddFriends (AddFriendReq) returns (Response) {}
+    // 删除好友
+    rpc DelFriends (DelFriendReq) returns (Response) {}
+    // 修改好友备注名
+    rpc UpdateFriendRemark (UpdateFriendRemarkReq) returns (Response) {}
+    // 添加好友到黑名单
+    rpc AddFriendBlackList (AddFriendBlackListReq) returns (Response) {}
+    // 从黑名单删除好友
+    rpc DelFriendBlackList (DelFriendBlackListReq) returns (Response) {}
+    // 获取好友列表
+    rpc GetAllFriends (FriendListReq) returns (FriendListResp) {}
+    // 获取黑名单列表
+    rpc GetBlackList (BlackListReq) returns (BlackListResp) {}
+    // 获取用户未读数
+    rpc GetUserUnReadCount (GetUserUnReadCountReq) returns (GetUserUnReadCountResp) {}
+
+    // 创建群组
+    rpc CreateGroup (Group) returns (CreateGroupResp) {}
+    // 解散群组
+    rpc DelGroup (DelGroupReq) returns (Response) {}
+    // 加入群组
+    rpc JoinGroup (JoinGroupReq) returns (Response) {}
+    // 删除群组成员
+    rpc DelGroupMember (DelGroupMemberReq) returns (Response) {}
+    // 获取群组成员列表
+    rpc GetGroupMemberList (GroupMemberListReq) returns (GroupMemberListResp) {}
+    // 获取群组列表
+    rpc GetGroupList (GroupListReq) returns (GroupListResp) {}
+    // 添加群组文件
+    rpc AddGroupFile (AddGroupFileReq) returns (Response) {}
+    // 获取群组文件
+    rpc GetGroupFile (GroupFileReq) returns (GroupFileResp) {}
+    // 添加群组照片
+    rpc AddGroupPicture (AddGroupPictureReq) returns (Response) {}
+    // 获取群组照片
+    rpc GetGroupPicture (GroupFileReq) returns (GroupPictureResp) {}
+    // 设置群组头像
+    rpc UpdateGroupAvatar (UpdateGroupAvatarReq) returns (Response) {}
+    // 设置群组简介
+    rpc UpdateGroupNotice (UpdateGroupNoticeReq) returns (Response) {}
+    // 设置群组名称
+    rpc UpdateGroupName (UpdateGroupNameReq) returns (Response) {}
+    // 设置加入群组需群主认证
+    rpc UpdateGroupJoinAuth (UpdateGroupJoinAuthReq) returns (Response) {}
+
+}
+
+message SendPeerMsgReq{
+    int64 uid = 1;
+    int64 receiver_uid = 2;
+    int64 appid = 3;
+    string content = 4;
+    string token = 5;
+    string msg_type = 6;
+    string chat_type = 7;
+    string method = 8;
+    string status = 9;
+    string username = 10; // 发送者名称
+    string user_id = 11;
+}
+
+message SendGroupMsgReq{
+    int64 uid = 1;
+    int64 friend_uid = 2;
+    int64 appid = 3;
+    string content = 4;
+    string token = 5;
+    string msg_type = 6;
+    string chat_type = 7;
+    string method = 8;
+    string status = 9;
+    string username = 10; // 发送者名称
+    string user_id = 11;
+}
+
+message AddFriendReq{
+    int64 uid = 1;
+    int64 friend_uid = 2;
+    int64 appid = 3;
+    string user_id = 4;
+}
+
+message DelFriendReq{
+    int64 uid = 1;
+    int64 friend_uid = 2;
+    int64 appid = 3;
+    string user_id = 4;
+}
+
+message UpdateFriendRemarkReq{
+    int64 uid = 1;
+    int64 friend_uid = 2;
+    int64 appid = 3;
+    string remark = 4;
+    string user_id = 5;
+}
+
+message AddFriendBlackListReq{
+    int64 uid = 1;
+    int64 friend_uid = 2;
+    int64 appid = 3;
+    string user_id = 4;
+}
+
+message DelFriendBlackListReq{
+    int64 uid = 1;
+    int64 friend_uid = 2;
+    int64 appid = 3;
+    string user_id = 4;
+}
+
+message FriendListReq{
+    int64 uid = 1;
+    int64 appid = 2;
+    string user_id = 3;
+}
+
+message FriendListResp{
+    repeated User friend_uids = 1;
+}
+
+message BlackListReq{
+    int64 uid = 1;
+    int64 appid = 2;
+    string user_id = 3;
+}
+
+message BlackListResp{
+    repeated User blacklist_uids = 1;
+}
+
+message DelGroupReq{
+    int64 group_id = 1;
+    int64 uid = 2;
+    int64 appid = 3;
+    string user_id = 4;
+}
+
+message JoinGroupReq{
+    int64 group_id = 1;
+    int64 uid = 2;
+    string nickname = 3;
+    int64 appid = 4;
+    string token = 5;
+    string msg_type = 6;
+    string chat_type = 7;
+    string method = 8;
+    string status = 9;
+    string content = 10;
+    string user_id = 11;
+}
+
+message DelGroupMemberReq{
+    int64 group_id = 1;
+    int64 uid = 2;
+    int64 appid = 3;
+    int64 member = 4;
+    string user_id = 5;
+}
+
+message GroupMemberListReq{
+    int64 group_id = 1;
+    int64 appid = 2;
+    int64 uid = 3;
+    string user_id = 4;
+}
+
+message GroupMemberListResp{
+    repeated User users = 1;
+    int64 num = 2; // 总人数
+}
+
+message User {
+    int64 uid = 1;
+    string nickname = 2;
+    bool mute = 3; // 禁言
+    string image_url = 4;
+    string remark = 5; // 备注名
+}
+
+message GroupListReq{
+    int64 uid = 1;
+    int64 appid = 2;
+    string user_id = 3;
+}
+
+message GetUserUnReadCountReq{
+    int64 uid = 1;
+    int64 appid = 2;
+    string user_id = 3;
+}
+
+message GetUserUnReadCountResp{
+    int64 unread_count = 1;
+}
+
+message GroupListResp{
+    repeated Group groups = 1;
+}
+
+message Group {
+    int64 id = 1;
+    int64 appid = 2;
+    int64 master = 3;  // 群主
+    int64 super = 4;
+    string name = 5;
+    string notice = 6; // 公告
+    string image_url = 7; // 群头像
+    int64 num = 8; // 群组人数
+    string user_id = 11;
+}
+
+message AddGroupFileReq{
+    int64 group_id = 1;
+    int64 uid = 2;
+    File file = 3;
+    string add_time =4;
+    string user_id = 5;
+}
+
+message GroupFileReq{
+    int64 group_id = 1;
+    int64 uid = 2;
+    string user_id = 3;
+}
+
+message GroupFileResp{
+    repeated UserFile userFiles = 1;
+}
+
+message UserFile {
+    repeated File files = 1;
+    string username = 2;
+    string add_time = 3;
+    int64 uid = 4;
+}
+
+message File {
+    string url = 1;
+    string format = 2;
+}
+
+message AddGroupPictureReq{
+    repeated PictureReq pictures = 1;
+    int64 uid = 2;
+    int64 group_id = 3;
+    string add_time =4;
+    string user_id = 5;
+}
+
+message PictureReq {
+    string imageId = 1;
+    int64 width = 2;
+    int64 height = 3;
+    string format = 4;
+}
+
+message GroupPictureResp{
+    repeated UserPicture userPictures = 1;
+}
+
+message UserPicture {
+    repeated Picture pictures = 1;
+    string username = 2;
+    string add_time = 3;
+}
+
+message Picture {
+    string thumbnailUrl = 1;
+    string user_iddlePicUrl = 2;
+    string picUrl = 3;
+    string format = 4;
+    int64 width = 5;
+    int64 height = 6;
+}
+
+// 动态里的用户基本信息
+message EsUserInfo {
+    string id = 1;
+    string username = 2;
+    string screenName = 3;
+    string bio = 4;
+    bool isVerified = 5;
+    string verifyMessage = 6;
+    string zodiac = 7;
+    Avatar avatarImage = 8;
+    int64 university_id = 9;
+    int64 mid = 10;
+}
+
+message Avatar {
+    string thumbnailUrl = 1;
+    string smallPicUrl = 2;
+    string picUrl = 3;
+}
+
+message UpdateGroupAvatarReq{
+    int64 gid = 1;
+    int64 appid = 2;
+    string image_url = 3;
+    int64 uid = 4;
+    string user_id = 5;
+}
+
+message UpdateGroupNoticeReq{
+    int64 gid = 1;
+    int64 appid = 2;
+    string notice = 3;
+    int64 uid = 4;
+    string user_id = 5;
+}
+
+message UpdateGroupNameReq{
+    int64 gid = 1;
+    int64 appid = 2;
+    string name = 3;
+    int64 uid = 4;
+    string user_id = 5;
+}
+
+message UpdateGroupJoinAuthReq{
+    int64 gid = 1;
+    int64 appid = 2;
+    int64 auth = 3;
+    int64 uid = 4;
+    string user_id = 5;
+}
+
+message CreateGroupResp {
+    // 响应是否成功
+    int64 success = 1;
+    // 响应信息
+    string msg = 2;
+    // 群组id
+    int64 group_id = 3;
+}
+
+message Response {
+    // 响应是否成功
+    int64 success = 1;
+    // 响应信息
+    string msg = 2;
+}

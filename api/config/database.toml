@@ -1,0 +1,51 @@
+env="development"
+
+[db_university_circles]
+    [db_university_circles.development]
+    driver="mysql"
+    host="127.0.0.1"
+    port="3306"
+    database="university_circles"
+    username="root"
+    password="I3T$GcnojZ%Db2GG*&Z^fQnb3^UYFk94"
+    timeout=1
+    maxIdle=10
+    maxOpen=1000
+    maxLifetime=300
+
+    [db_university_circles.production]
+    driver="mysql"
+    host="127.0.0.1"
+    port="3306"
+    database="university_circles"
+    username="root"
+    password="I3T$GcnojZ%Db2GG*&Z^fQnb3^UYFk94"
+    timeout=1
+    maxIdle=10
+    maxOpen=1000
+    maxLifetime=300
+
+[db_example]
+    [db_example.development]
+    driver="mysql"
+    host="127.0.0.1"
+    port="3306"
+    database="example"
+    username="root"
+    password="I3T$GcnojZ%Db2GG*&Z^fQnb3^UYFk94"
+    timeout=1
+    maxIdle=10
+    maxOpen=1000
+    maxLifetime=300
+
+    [db_example.production]
+    driver="mysql"
+    host="127.0.0.1"
+    port="3306"
+    database="example"
+    username="root"
+    password="I3T$GcnojZ%Db2GG*&Z^fQnb3^UYFk94"
+    timeout=1
+    maxIdle=10
+    maxOpen=1000
+    maxLifetime=300

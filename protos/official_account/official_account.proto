@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package university_circles.srv.protos;
+
+message OfficialAccount{
+    int64 id = 1;
+    string name = 2;
+    string content = 3;
+    int64 university_id = 4;
+    int64 college_id = 5;
+    int64 science_id = 6;
+    int64 class_id = 7;
+    int64 level = 8;
+    int64 delete = 9;
+    string created = 10;
+}

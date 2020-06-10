@@ -1,0 +1,14 @@
+env="development"
+
+[elastic_search]
+    [elastic_search.development]
+    host="127.0.0.1"
+    port="21759"
+    username="elastic"
+    password="A&q9r^l@nMv70tSzgVK&^*Xs*#OqwcojB9NU"
+
+    [elastic_search.production]
+    host="127.0.0.1"
+    port="21759"
+    username="elastic"
+    password="A&q9r^l@nMv70tSzgVK&^*Xs*#OqwcojB9NU"

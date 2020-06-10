@@ -1,0 +1,242 @@
+syntax = "proto3";
+
+package university_circles.srv.home;
+
+service HomeService {
+    // 发布动态
+    rpc SavePublishMsg (PublishMsg) returns (Response) {}
+    // 删除动态
+    rpc DeletePublishMsg (DeleteMsgRequest) returns (Response) {}
+    // 获取首页动态列表
+    rpc GetHomeMsgList (AllMsgListRequest) returns (HomeMsgListResponse) {}
+    // 获取某个用户的动态列表
+    rpc GetUserMsgList (UserMsgListRequest) returns (OtherMsgListResponse) {}
+    // 获取某个动态详情
+    rpc GetMsgDetail (OneMsgRequest) returns (OtherMsgListResponse) {}
+    // 发布动态评论
+    rpc SaveMsgComment (PublishMsgComment) returns (Response) {}
+    // 获取评论列表
+    rpc GetMsgCommentList (MsgCommentListRequest) returns (MsgCommentListResponse) {}
+    // 删除评论
+    rpc DeletePublishMsgComment (DeleteMsgCommentRequest) returns (Response) {}
+    // 记录用户操作动态数，如分享、评论、点赞
+    rpc SaveUserOperateMsgCount (UserOperateCountRequest) returns (Response) {}
+    // 获取用户操作动态数，如分享数、评论数、点赞数
+    rpc GetUserOperateMsgCount (UserOperateCountRequest) returns (UserOperateCountResponse) {}
+    // 获取用户操作的列表数据，如评论过的动态列表
+    rpc GetUserOperateMsgRecodeList (UserOperateRecodeListRequest) returns (OtherMsgListResponse) {}
+
+}
+
+message PublishMsg {
+    string uid = 1;
+    string content = 2;
+    repeated PictureReq pictures = 3;
+    Poi poi = 4;
+    string type = 5;
+    int64 msg_type = 6;
+    LinkInfo LinkInfo = 7;
+    Video video = 8;
+}
+
+message PublishMsgResponse {
+    string id = 1;
+    int64 msg_type = 2;
+    string content = 3;
+    repeated Picture pictures = 4;
+    Poi poi = 5;
+    string type = 6;
+    string status = 7;
+    int64 commentCount = 8;
+    int64 shareCount = 9;
+    int64 likeCount = 10;
+    LinkInfo LinkInfo = 11;
+    string createdAt = 12;
+    EsUserInfo user = 13;
+    bool isCommentForbidden = 14;
+    bool liked = 15;
+    bool collected = 16;
+    int64 orderId = 17;
+    Video video = 18;
+    bool isFollow = 19;
+}
+
+message PublishMsgComment {
+    string id = 1;
+    string targetId = 2;
+    string content = 3;
+    repeated Picture pictures = 4;
+    bool liked = 5;
+    string type = 6;
+    string status = 7;
+    int64 level = 8;
+    int64 replyCount = 9;
+    int64 likeCount = 10;
+    PublishMsgComment replyToComment = 11;
+    repeated UrlsInText urlsInText = 12;
+    string createdAt = 13;
+    EsUserInfo user = 14;
+    int64 orderId = 15;
+
+}
+
+message PictureReq {
+    string imageId = 1;
+    int64 width = 2;
+    int64 height = 3;
+    string format = 4;
+}
+
+message Picture {
+    string thumbnailUrl = 1;
+    string middlePicUrl = 2;
+    string picUrl = 3;
+    string format = 4;
+    int64 width = 5;
+    int64 height = 6;
+}
+
+message Poi {
+    repeated Location location = 1;
+    string countryname = 2;
+    string poiId = 3;
+    string formattedAddress = 4;
+    string cityname = 5;
+    string pname = 6;
+    string name = 7;
+}
+
+message Location {
+    double loc = 1;
+}
+
+message LinkInfo {
+    string title = 1;
+    string pictureUrl = 2;
+    string linkUrl = 3;
+    string source = 4;
+    Audio audio = 5;
+    Video video = 6;
+}
+
+message UrlsInText {
+    string title = 1;
+    string originalUrl = 2;
+    string url = 3;
+}
+
+message Video {
+    string type = 1;
+    Picture image = 2;
+    int64 duration = 3;
+    double width = 4;
+    double height = 5;
+}
+
+message Audio {
+    string type = 1;
+    Picture image = 2;
+    string title = 3;
+    string author = 4;
+}
+
+message OneMsgRequest {
+    string id = 1;
+    string uid = 2;
+    int64 university_id = 3;
+}
+
+message AllMsgListRequest {
+    int64 msg_type = 1;
+    int64 order_id = 2;
+    bool load_more = 3;
+    string uid = 4;
+    int64 university_id = 5;
+}
+
+message UserMsgListRequest {
+    string uid = 1;
+    int64 orderId = 2;
+    int64 msg_type = 3;
+    int64 universityId = 4;
+}
+
+message HomeMsgListResponse {
+     repeated PublishMsgListResponse publishMsgResponseList = 1;
+}
+
+message OtherMsgListResponse {
+    repeated PublishMsgResponse publishMsgResponseList = 1;
+}
+
+message PublishMsgListResponse {
+    string type = 1;
+    PublishMsgResponse item = 2;
+    string id = 3;
+}
+
+message MsgCommentListRequest {
+    string msg_id = 1;
+    int64 orderId = 2;
+}
+
+message MsgCommentListResponse {
+    repeated PublishMsgComment publishMsgComments = 1;
+}
+
+message Response {
+    // 响应是否成功
+    int64 success = 1;
+    // 响应信息
+    string msg = 2;
+}
+
+message UserOperateCountRequest {
+    string uid = 1;
+    string msg_id = 2;
+    int64 type = 3;
+}
+
+message UserOperateCountResponse {
+    int64 count = 1;
+}
+
+message UserOperateRecodeListRequest {
+    string uid = 1;
+    int64 type = 2;
+}
+
+message UserOperateRecodeListResponse {
+    repeated PublishMsg publishMsg = 1;
+}
+
+
+message DeleteMsgRequest {
+    string uid = 1;
+    string id = 2;
+}
+
+message DeleteMsgCommentRequest {
+    string uid = 1;
+    string msg_id = 2;
+    string id = 3;
+}
+
+// 动态里的用户基本信息
+message EsUserInfo {
+    string id = 1;
+    string username = 2;
+    string screenName = 3;
+    string bio = 4;
+    bool isVerified = 5;
+    string verifyMessage = 6;
+    string zodiac = 7;
+    Avatar avatarImage = 8;
+    int64 university_id = 9;
+}
+
+message Avatar {
+    string thumbnailUrl = 1;
+    string smallPicUrl = 2;
+    string picUrl = 3;
+}
